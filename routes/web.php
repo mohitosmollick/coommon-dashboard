@@ -16,8 +16,13 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 // users
 Route::get('/users',[UserController::class, 'userList'])->name('users');
 Route::get('/user_delete/{user_id}',[UserController::class, 'userDelete'])->name('user_delete');
+
+Route::get('/profile',[UserController::class, 'profile'])->name('profile');
+Route::post('/update_profile',[UserController::class, 'updateProfile'])->name('update_profile');
+Route::post('/update/password',[UserController::class, 'passwordUpdate']);
+Route::post('/user_photo_update',[UserController::class, 'updateProfileImage']);
+
 Route::get('/edit_user',[UserController::class, 'editUser'])->name('edit_user');
-Route::get('/update_user',[UserController::class, 'updateUser'])->name('update_user');
 
 
 

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -26,46 +29,50 @@ class UserController extends Controller
     }
 
 
-    public function editUser(){
+
+    public function profile(){
         return view('dashboard.users.editUser');
     }
 
-//    public function updateName(Request $request){
-//        User::find(Auth::id())->update([
-//            'name' => $request-> user_name,
-//            'updated_at' => Carbon::now(),
-//        ]);
-//        return back()->with('success','Profile Name updated Successfully');
-//    }
+    public  function updateProfile(Request $request){
+        User::find(Auth::id())->update([
+            'name' => $request->name,
+            'updated_at' => Carbon::now(),
+        ]);
 
-//    public function updatePassword(Request $request){
-//
-//        $request->validate([
-//            'old_password' => 'required',
-//            'password' => [
-//                'confirmed',
-//                'required',
-//                Password::min(8)
-//
-//
-//            ],
-//            'password_confirmation' => 'required',
-//        ]);
-//
-//        if (Hash::check($request->old_password,Auth::user()->password)){
-//            if (Hash::check($request->password,Auth::user()->password)){
-//                return back()->with('taken_pass','This Password already taken');
-//            }else{
-//                User::find(Auth::id())->update([
-//                    'password' => $request->password,
-//                    'updated_at' => Carbon::now(),
-//                ]);
-//            }
-//
-//        }else{
-//            return back()->with('wrong_pass','Please input Correct Password');
-//        }
-//    }
+        return back()->with('success', 'Name Updated Successfully');
+    }
+
+    public function passwordUpdate(Request $request){
+        $request->validate([
+            'old_password' => 'required',
+            'password' => [
+                'confirmed',
+                'required',
+                Password::min(8)
+            ],
+            'password_confirmation' => 'required',
+        ]);
+
+        if (Hash::check($request->old_password,Auth::user()->password)){
+            if (Hash::check($request->password,Auth::user()->password)){
+                return back()->with('taken_pass','This Password already taken');
+            }else{
+                User::find(Auth::id())->update([
+                    'password' => $request->password,
+                    'updated_at' => Carbon::now(),
+                ]);
+
+                return back()->with('success_pass','Password Change successfully');
+            }
+
+        }else{
+            return back()->with('wrong_pass','Please input Correct Password');
+        }
+
+    }
+
+
 
     public function updateProfileImage(Request $request){
         $request->validate([
@@ -77,17 +84,17 @@ class UserController extends Controller
         $extension = $upload_photo->getClientOriginalExtension();
         $filename = Auth::id().'.'.$extension;
 
-        if (Auth::user()->profile_img == 'profile.png'){
-            $request->profile_photo->move(public_path('/dashboard/images/profile'), $filename);
+        if (Auth::user()->profile_img == 'default.png'){
+            $request->profile_photo->move(public_path('/uploads/users'), $filename);
             User::find(Auth::id())->update([
                 'profile_img' => $filename,
             ]);
             return back();
         }else{
-            $delete_img = public_path('/dashboard/images/profile/'.Auth::user()->profile_img);
+            $delete_img = public_path('/uploads/users/'.Auth::user()->profile_img);
             unlink($delete_img);
 
-            $request->profile_photo->move(public_path('/dashboard/images/profile'), $filename);
+            $request->profile_photo->move(public_path('/uploads/users'), $filename);
             User::find(Auth::id())->update([
                 'profile_img' => $filename,
             ]);
