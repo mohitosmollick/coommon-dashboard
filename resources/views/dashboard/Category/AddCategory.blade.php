@@ -59,7 +59,15 @@
                             <tr>
                                 <td><input type="checkbox"  name="mark[]" value="{{$value->id}}"></td>
                                 <td>{{$key+1}}</td>
-                                <td>{{$value->rel_to_user->name}}</td>
+                                <td>
+                                    @php
+                                        if(App\Models\User::where('id',$value->user_id )->exists()){
+                                            echo $value->rel_to_user->name;
+                                        }else{
+                                            echo 'N/A';
+                                        }
+                                    @endphp
+                                </td>
                                 <td>{{$value->category_name}}</td>
                                 <td>{{$value->category_slug}}</td>
                                 <td>{{$value->created_at->diffForHumans()}}</td>
@@ -104,7 +112,17 @@
                             <tr>
                                 <td><input type="checkbox"  name="delete[]" value="{{$value->id}}"></td>
                                 <td>{{$key+1}}</td>
-                                <td>{{$value->rel_to_user->name}}</td>
+                                <td>
+                                <td>
+                                    @php
+                                        if(App\Models\User::where('id',$value->user_id )->exists()){
+                                            echo $value->rel_to_user->name;
+                                        }else{
+                                            echo 'N/A';
+                                        }
+                                    @endphp
+                                </td>
+                                </td>
                                 <td>{{$value->category_name}}</td>
                                 <td>{{$value->category_slug}}</td>
                                 <td>{{$value->created_at->diffForHumans()}}</td>

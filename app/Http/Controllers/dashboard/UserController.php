@@ -14,11 +14,13 @@ class UserController extends Controller
 {
 
     public function userList(){
-        $users = User::where('id', '!=' , Auth::id())->simplePaginate(2);
+        $users = User::where('id', '!=' , Auth::id())->simplePaginate(5);
         $total_users = User::count();
+        $trash_users = User::onlyTrashed()->get();
         return view('dashboard.users.userList',[
             'users' => $users,
-            'total_user' => $total_users
+            'total_user' => $total_users,
+            'trash_users' => $trash_users,
         ]);
 
     }
@@ -28,7 +30,15 @@ class UserController extends Controller
         return back();
     }
 
+    public function userHardDelete($user_id){
+        User::onlyTrashed()->find($user_id)->forceDelete();
+        return back();
+    }
 
+    public function restoreUser($user_id){
+        User::onlyTrashed()->find($user_id)->restore();
+        return back();
+    }
 
     public function profile(){
         return view('dashboard.users.editUser');
