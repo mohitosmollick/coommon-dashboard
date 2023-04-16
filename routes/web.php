@@ -52,6 +52,7 @@ Route::get('/subCat_reStore/{id}',[SubCategoryController::class,'subCatReStore']
 Route::get('/product_list',[ProductController::class,'productList'])->name('product_list');
 Route::get('/adding_product',[ProductController::class,'addingProduct'])->name('adding_product');
 Route::post('/add_product',[ProductController::class,'addProduct'])->name('add_product');
+Route::post('/getSubCategory',[ProductController::class,'getSubCategory']);
 Route::get('/soft_delete_product/{id}',[ProductController::class,'softDeleteProduct'])->name('soft_delete_product');
-Route::get('/hard_delete_product/{id}',[ProductController::class,'hardDeleteProduct'])->name('hard_delete_product');
+Route::get('/delete_product/{product_id}',[ProductController::class,'deleteProduct'])->name('delete_product');
 Route::get('/product_reStore/{id}',[ProductController::class,'productReStore'])->name('product_reStore');

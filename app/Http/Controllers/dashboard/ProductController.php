@@ -92,6 +92,11 @@ class ProductController extends Controller
 
     }
 
+    public function deleteProduct($product_id){
+        Product::onlyTrashed()->find($product_id)->forceDelete();
+        return back();
+    }
+
 
 
 

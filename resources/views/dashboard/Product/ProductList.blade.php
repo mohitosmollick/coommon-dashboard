@@ -79,7 +79,7 @@
                     <td width="100"><img class="img-fluid" src="{{ asset('/uploads/products')}}/{{$tProduct->preview}}" alt=""> </td>
                     <td width="100">
                         <a href="{{route('product_reStore',$tProduct->id )}}" class="btn btn-primary shadow btn-xs sharp"><i class="fa fa-pencil mt-1"></i></a>
-                        <a href="{{route('hard_delete_product',$tProduct->id)}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                        <a href="{{route('delete_product',$tProduct->id)}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
             @endforeach
