@@ -74,7 +74,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="">Your Name</label>
-                            <input  type="file" class="form-control" name="profile_photo"  value="">
+                            <input  type="file" class="form-control" name="profile_img"  value="">
                             @error('profile_img')<small class="text-danger"> {{$message}}</small>@enderror
                         </div>
                         <div class="form-group mt-2">

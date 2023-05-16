@@ -413,27 +413,19 @@
                         <span class="nav-text">Customer</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="./ui-accordion.html">Accordion</a></li>
-                        <li><a href="./ui-alert.html">Alert</a></li>
-
-
+                        <li><a href="{{route('customers')}}">CustomerList</a></li>
                     </ul>
                 </li>
+
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-381-layer-1"></i>
-                        <span class="nav-text">Pages</span>
+                        <span class="nav-text">Service</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="./page-register.html">Register</a></li>
-                        <li><a href="./page-login.html">Login</a></li>
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                            <ul aria-expanded="false">
-                                <li><a href="./page-error-400.html">Error 400</a></li>
-                                <li><a href="./page-error-403.html">Error 403</a></li>
-
-                            </ul>
-                        </li>
-
+                        <li><a href="{{route('add.services')}}">Add Service</a></li>
+                    </ul>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('services.list')}}">Our Service</a></li>
                     </ul>
                 </li>
             </ul>

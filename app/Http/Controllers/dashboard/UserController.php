@@ -22,7 +22,6 @@ class UserController extends Controller
             'total_user' => $total_users,
             'trash_users' => $trash_users,
         ]);
-
     }
 
     public function userDelete($user_id){
@@ -84,34 +83,30 @@ class UserController extends Controller
 
 
 
-    public function updateProfileImage(Request $request){
+    public function userPhotoUpdate(Request $request){
         $request->validate([
-            'profile_photo' => 'mimes:jpg,bmp,png|file|max:1024',
-
+            'profile_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        $upload_photo = $request->profile_photo;
+        $upload_photo = $request->profile_img;
         $extension = $upload_photo->getClientOriginalExtension();
-        $filename = Auth::id().'.'.$extension;
+        $fileName = Auth::id().'_'.time().'.'.$extension;
 
-        if (Auth::user()->profile_img == 'default.png'){
-            $request->profile_photo->move(public_path('/uploads/users'), $filename);
+        if (Auth::user()->profile_img == 'user1.png'){
+            $request->profile_img->move(public_path('/uploads/users/'), $fileName);
+//            Image::make($upload_photo)->resize(300, 200)->save(public_path('/uploads/user/'), $fileName);
             User::find(Auth::id())->update([
-                'profile_img' => $filename,
+                'profile_img' => $fileName,
             ]);
             return back();
         }else{
-            $delete_img = public_path('/uploads/users/'.Auth::user()->profile_img);
-            unlink($delete_img);
-
-            $request->profile_photo->move(public_path('/uploads/users'), $filename);
+            $delete_from = public_path('/uploads/users/'.Auth::user()->profile_img);
+            unlink($delete_from);
+            $request->profile_img->move(public_path('/uploads/users/'), $fileName);
             User::find(Auth::id())->update([
-                'profile_img' => $filename,
+                'profile_img' => $fileName,
             ]);
             return back();
-
         }
-
 
     }
 }

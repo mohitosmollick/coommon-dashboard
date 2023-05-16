@@ -34,7 +34,7 @@
                             <td>{{substr($product->long_desp, 0, 10) }}</td>
                             <td width="100"><img class="img-fluid" src="{{ asset('/uploads/products')}}/{{$product->preview}}" alt=""> </td>
                             <td width="100">
-                                <a href="" class="btn btn-primary shadow btn-xs sharp"><i class="fa fa-archive"></i></a>
+                                <a href="{{route('edit_product',$product->id)}}" class="btn btn-primary shadow btn-xs sharp"><i class="fa fa-archive"></i></a>
                                 <a href="{{route('soft_delete_product',$product->id)}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>

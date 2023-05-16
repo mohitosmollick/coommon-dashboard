@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\dashboard\CategoryController;
+use App\Http\Controllers\dashboard\ClientConroller;
 use App\Http\Controllers\dashboard\ProductController;
 use App\Http\Controllers\dashboard\subCategoryController;
 use App\Http\Controllers\dashboard\UserController;
+use App\Http\Controllers\ServiceController;
+use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,11 +25,23 @@ Route::get('/user_delete/{user_id}',[UserController::class, 'userDelete'])->name
 Route::get('/user_hard_delete/{user_id}',[UserController::class, 'userHardDelete'])->name('user_hard_delete');
 Route::get('/restore_user/{user_id}',[UserController::class, 'restoreUser'])->name('restore_user');
 Route::get('/edit_user',[UserController::class, 'editUser'])->name('edit_user');
+
+// Customers
+Route::get('/customers',[ClientConroller::class, 'customers'])->name('customers');
+
+//Services
+Route::get('/add/services',[ServiceController::class, 'addServices'])->name('add.services');
+Route::get('/services/list',[ServiceController::class, 'servicesList'])->name('services.list');
+Route::post('/service/insert',[ServiceController::class, 'serviceInsert'])->name('services.insert');
+Route::post('/service/soft_delete',[ServiceController::class, 'SoftDeleteService'])->name('soft.delete.service');
+Route::post('/edit/service',[ServiceController::class, 'editService'])->name('edit.edit');
+
+
 // Edit Admin users
 Route::get('/profile',[UserController::class, 'profile'])->name('profile');
 Route::post('/update_profile',[UserController::class, 'updateProfile'])->name('update_profile');
 Route::post('/update/password',[UserController::class, 'passwordUpdate']);
-Route::post('/user_photo_update',[UserController::class, 'updateProfileImage']);
+Route::post('/user_photo_update',[UserController::class, 'userPhotoUpdate'])->name('userPhotoUpdate');
 
 //category
 Route::post('/category/insert',[CategoryController::class,'categoryInsert'])->name('category_insert');
@@ -53,6 +69,13 @@ Route::get('/product_list',[ProductController::class,'productList'])->name('prod
 Route::get('/adding_product',[ProductController::class,'addingProduct'])->name('adding_product');
 Route::post('/add_product',[ProductController::class,'addProduct'])->name('add_product');
 Route::post('/getSubCategory',[ProductController::class,'getSubCategory']);
+Route::get('/edit_product/{product_id}',[ProductController::class,'editProduct'])->name('edit_product');
+Route::post('/update_product',[ProductController::class,'updateProduct'])->name('update_product');
 Route::get('/soft_delete_product/{id}',[ProductController::class,'softDeleteProduct'])->name('soft_delete_product');
 Route::get('/delete_product/{product_id}',[ProductController::class,'deleteProduct'])->name('delete_product');
 Route::get('/product_reStore/{id}',[ProductController::class,'productReStore'])->name('product_reStore');
+
+
+
+
+

@@ -28,10 +28,12 @@
                                     <option value="">--Select Category--</option>
                                     @foreach($category as $values)
                                         <option value="{{$values->id}}">{{$values->category_name}}</option>
+
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="" class="form-label">Sub_Category</label>
@@ -68,12 +70,6 @@
                             <div class="form-group">
                                 <label for="" class="form-label">Image</label>
                                 <input type="file" name="product_image" id="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="form-label">Product Thumbnails</label>
-                                <input type="file" name="thumbnails[]" id="" multiple class="form-control">
                             </div>
                         </div>
                         <div class="col-md-12">
