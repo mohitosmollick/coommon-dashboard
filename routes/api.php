@@ -29,7 +29,7 @@ Route::get('/clients',[ApiController::class,'clients']);
 
 
 //apiroute
-Route::post('/client_register',[ApiController::class,'clientRegister'])->name('client.register');
+Route::post('/client_register',[ApiController::class,'clientRegister']);
 //Route::get('/client_profile/{id}',[ApiController::class,'clientProfile'])->name('client.profile');
 Route::post('/client_login',[ApiController::class,'clientLogin'])->name('client.login');
 

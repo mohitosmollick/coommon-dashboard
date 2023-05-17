@@ -58,7 +58,8 @@ class ApiController extends Controller
             ],
         ]);
 
-       if( Client::create([
+
+       if( Client::insert([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
