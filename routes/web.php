@@ -1,23 +1,30 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\ClientConroller;
 use App\Http\Controllers\dashboard\ProductController;
 use App\Http\Controllers\dashboard\subCategoryController;
 use App\Http\Controllers\dashboard\UserController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/admin/login/form', [HomeController::class,'Login'])->name('admin.login.from');
+Route::get('/admin/register/form', [HomeController::class,'Register'])->name('admin.register.form');
+Route::post('/admin/register', [HomeController::class,'UserRegister']);
+Route::post('/admin/login', [HomeController::class,'UserLogin']);
+Route::get('/admin/logout', [HomeController::class, 'Logout'])->name('admin.logout');
+
+Route::group(['middleware' => ['guard']], function () {
 
 
 Route::get('/admin_panel', [BackendController::class, 'welcome'])->name('dashboard');
-
-Auth::routes();
-
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 // Admin users
 Route::get('/users',[UserController::class, 'userList'])->name('users');
@@ -76,6 +83,4 @@ Route::get('/delete_product/{product_id}',[ProductController::class,'deleteProdu
 Route::get('/product_reStore/{id}',[ProductController::class,'productReStore'])->name('product_reStore');
 
 
-
-
-
+});

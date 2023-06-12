@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class BackendController extends Controller
 {
     public function welcome(){
-        $login_user = Auth::user()->name;
+        $login_user = \Auth::user()->name;
         return view('dashboardhome',compact('login_user'));
     }
 

@@ -15,7 +15,10 @@ class Client extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable ;
     protected  $guarded = ['id'];
 
-    protected $guard = 'customerlogin';
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',

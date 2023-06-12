@@ -14,7 +14,7 @@ class UserController extends Controller
 {
 
     public function userList(){
-        $users = User::where('id', '!=' , Auth::id())->simplePaginate(5);
+        $users = User::where('id', '!=' , \Auth::id())->simplePaginate(5);
         $total_users = User::count();
         $trash_users = User::onlyTrashed()->get();
         return view('dashboard.users.userList',[
@@ -44,7 +44,7 @@ class UserController extends Controller
     }
 
     public  function updateProfile(Request $request){
-        User::find(Auth::id())->update([
+        User::find(\Auth::id())->update([
             'name' => $request->name,
             'updated_at' => Carbon::now(),
         ]);
@@ -63,11 +63,11 @@ class UserController extends Controller
             'password_confirmation' => 'required',
         ]);
 
-        if (Hash::check($request->old_password,Auth::user()->password)){
-            if (Hash::check($request->password,Auth::user()->password)){
+        if (Hash::check($request->old_password,\Auth::user()->password)){
+            if (Hash::check($request->password,\Auth::user()->password)){
                 return back()->with('taken_pass','This Password already taken');
             }else{
-                User::find(Auth::id())->update([
+                User::find(\Auth::id())->update([
                     'password' => $request->password,
                     'updated_at' => Carbon::now(),
                 ]);
@@ -109,4 +109,6 @@ class UserController extends Controller
         }
 
     }
+
+
 }

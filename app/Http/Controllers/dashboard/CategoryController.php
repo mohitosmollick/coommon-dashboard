@@ -27,7 +27,7 @@ class CategoryController extends Controller
     public function categoryInsert(CategoryRequest $request) {
 
         Category::insert([
-            'user_id' => Auth::id(),
+            'user_id' => \Auth::id(),
             'category_name' => $request->category_name,
             'category_slug' => strtolower(str_replace(' ','_',$request->category_name)),
             'created_at' => Carbon::now(),

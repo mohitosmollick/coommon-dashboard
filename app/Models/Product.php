@@ -13,11 +13,14 @@ class Product extends Model
     protected $table='products';
 
     protected  $guarded = ['id'];
-    function rel_to_category(){
+
+
+    function relToCategory(){
         return $this->belongsTo(Category::class, 'category_id');
     }
-    function rel_to_subcategory(){
-        return $this->belongsTo(SubCategory::class, 'subcategory_id');
-    }
+//    function relToSubcategory(){
+//        return $this->belongsTo(SubCategory::class, 'subcategory_id');
+//    }
+
 
 }
